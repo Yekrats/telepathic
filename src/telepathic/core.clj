@@ -9,14 +9,16 @@
   (println "Hello, World!"))
 
 (def colors [:purple :blue :green :orange])
+
 (def shapes [:plus :circle :star :bacon])
+
 (def tiles (vec (apply concat (into [] (for [color colors] (into [] (for [shape shapes] [color shape]))))))) ; added (apply concat ...) to flatten one level. -- sws
+
 (def tiles2 (into [] (for [color colors] (into [] (for [shape shapes] [color shape])))))
 
 (defn match3 [set]
   (when (apply = set)
-    (first set))
-  )
+    (first set)))
 
 (defn check4 [set]
   "Take in a set of 4 paired items.
@@ -38,17 +40,21 @@
     (match3 (second (apply map vector (first (partition 3 1 set)))))
     (match3 (second (apply map vector (second (partition 3 1 set)))))))
 
-(def tperm (combo/permutations tiles))
+(def perm "All the permutations of tiles." (combo/permutations tiles))
 
 (defn rot-90 [s]
-  "Takes a sequence of 16 vector pairs and rotates it 90 degrees."
+  "Takes a sequence of 16 vector pairs and rotates it 90°."
   (vec (apply concat (apply mapv vector (partition 4 s)))))
 
 (defn any-row-match? [s]
+  "Performs qcheck4 function, taking the first row '(take 4 s)', then calling
+  itself recursively until all are taken."
   (when (seq s)
     (or (qcheck4 (take 4 s)) (any-row-match? (drop 4 s)))))
 
 (defn any-col-match? [s]
+  "The same as any-row-match? function, but performing a 90° rotation first,
+  to capture columns."
   (any-row-match? (rot-90 s)))
 
 (defn any-rc-match? [s]
@@ -57,11 +63,10 @@
 (defn test-each-row [s]
   "Returns sequence of matched 3s in the 4 rows"
   (flatten (when (seq s)
-             (conj [] (check4 (take 4 s)) (test-each-row (drop 4 s)))
-             )))
+             (conj [] (check4 (take 4 s)) (test-each-row (drop 4 s))))))
 
 (defn push-one-row-forwards [[%1 %2 %3 %4]]
-  "Inputs a set of 4 outputs pushed set."
+  "Inputs a set of 4, outputs set pushed by one."
   (seq [%4 %1 %2 %3]))
 
 (defn push-one-row-backwards [[%1 %2 %3 %4]]
@@ -82,7 +87,6 @@
 (defn push-one-row-north [s rownum] (rot-90 (push-one-row-west (rot-90 s) rownum)))
 
 (defn push-one-row-south [s rownum] (rot-90 (push-one-row-east (rot-90 s) rownum)))
-
 
 (defn test-push-east? [s]
   "Apply 'push east' on each row, and checks for any-rc-match? after each push."
@@ -112,12 +116,14 @@
         i
         set)
       (recur (shuffle tiles) (inc i)))))
+
 (defn anols [times-to-try]                                ; approx number of legal sets
   (loop [n times-to-try legal 0 set (shuffle tiles)]
     (if (> n 0)
       (recur (dec n) (if (any-rc-match? set) legal (inc legal)) (shuffle tiles))
       (float (/ legal times-to-try))
       )))
+
 (defn card-tests? [s]
   (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
 
@@ -139,7 +145,6 @@
   (str (capitalize-key c) " " (capitalize-key s) ".png"))
 
 (comment
-
   (check4 sample1)
   (check4 samplefail)
   (test-each-row (nth tperm 100))
@@ -213,13 +218,10 @@
   (defn blah [a s]
     (into {} (map #([a %]) s)))
 
-
-
-  (defn gcd [x y]
     (loop [mx (max x y) mn (min x y) n mn]
       (if (= 0 (mod mx n) (mod mn n))
         n
-        (recur mx mn (dec n)))))
+        (recur mx mn (dec n))))
 
   (defn sometrue [& xs]
     (and (not-every? false? xs) (not-every? true? xs)))
@@ -275,5 +277,4 @@
     (into [] (take x s))
     )
   )
-
 
