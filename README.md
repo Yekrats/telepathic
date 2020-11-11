@@ -1,6 +1,6 @@
 # telepathic
 
-FIXME: description
+Implementation of Carl Klutzke's "Telepathic" https://www.thegamecrafter.com/games/telepathic
 
 ## Installation
 
@@ -12,25 +12,6 @@ FIXME: explanation
 
     $ java -jar telepathic-0.1.0-standalone.jar [args]
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
 ## License
 
-Copyright © 2020 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Copyright © 2020
