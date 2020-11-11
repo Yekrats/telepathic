@@ -14,9 +14,8 @@
 
 (def tiles (vec (apply concat (into [] (for [color colors] (into [] (for [shape shapes] [color shape]))))))) ; added (apply concat ...) to flatten one level. -- sws
 
-(def tiles2 (into [] (for [color colors] (into [] (for [shape shapes] [color shape])))))
-
 (defn match3 [set]
+  "Checks all the members of a set. If all match, return that value. Otherwise return nil."
   (when (apply = set)
     (first set)))
 
@@ -58,6 +57,7 @@
   (any-row-match? (rot-90 s)))
 
 (defn any-rc-match? [s]
+  "Do any row or column have a matching set of 3?"
   ((some-fn any-row-match? any-col-match?) s))
 
 (defn test-each-row [s]
@@ -73,20 +73,26 @@
   [%2 %3 %4 %1])
 
 (defn push-one-row-east [s rownum]
+  "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
                          (push-one-row-forwards (take 4 (drop (* i 4) s)))
                          (take 4 (drop (* i 4) s)))))))
 
 (defn push-one-row-west [s rownum]
+  "Takes in a set of 16 tiles, and pushes one 'rownum' to the west."
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
                          (push-one-row-backwards (take 4 (drop (* i 4) s)))
                          (take 4 (drop (* i 4) s)))))))
 
-(defn push-one-row-north [s rownum] (rot-90 (push-one-row-west (rot-90 s) rownum)))
+(defn push-one-row-north [s colnum]
+  "Takes in a set of 16 tiles, and pushes one 'colnum' to the north."
+  (rot-90 (push-one-row-west (rot-90 s) colnum)))
 
-(defn push-one-row-south [s rownum] (rot-90 (push-one-row-east (rot-90 s) rownum)))
+(defn push-one-row-south [s colnum]
+  "Takes in a set of 16 tiles, and pushes one 'colnum' to the south."
+  (rot-90 (push-one-row-east (rot-90 s) colnum)))
 
 (defn test-push-east? [s]
   "Apply 'push east' on each row, and checks for any-rc-match? after each push."
@@ -167,25 +173,6 @@
      [:orange :bacon] [:purple :star] [:green :circle] [:purple :plus]]
     )
 
-  ; push-one-row-west on shuffled-set 1
-  ; [[:purple :plus] [:green :plus] [:purple :star] [:orange :circle]
-  ; [:blue :circle] [:green :circle] [:green :star] [:orange :bacon]
-  ; [:blue :plus] [:orange :star] [:blue :star] [:green :bacon]
-  ; [:purple :bacon] [:green :star] [:blue :bacon] [:orange :plus]]
-
-  ; push-one-row-north on shuffled-set
-  ; [[:orange :bacon] [:green :plus] [:purple :star] [:orange :circle]
-  ; [:blue :plus] [:blue :circle] [:green :circle] [:green :star]
-  ; [:purple :bacon] [:orange :star] [:blue :star] [:green :bacon]
-  ; [:purple :plus] [:green :star] [:blue :bacon] [:orange :plus]]
-
-  ; push-one-row-south on shuffled-set 2
-  ;
-  ; [[:purple :plus] [:green :plus] [:blue :bacon] [:orange :circle]
-  ; [:orange :bacon] [:blue :circle] [:purple :star] [:green :star]
-  ; [:blue :plus] [:orange :star] [:green :circle] [:green :bacon]
-  ; [:purple :bacon] [:green :star] [:blue :star] [:orange :plus]]
-
   (any-rc-match? shuffled-set)
 
   (def sls                                                  ; shuffled-legal-start
@@ -202,12 +189,7 @@
         (float (/ legal times-to-try))
         )))
 
-
-  (apply = (first (apply map vector (first (partition 3 1 set)))))
-  (apply = (second (apply map vector (first (partition 3 1 set)))))
-
   (def sample1 [[:purple :plus] [:purple :circle] [:purple :star] [:orange :star]])
-
 
   (def samplefail [[:purple :plus] [:blue :star] [:orange :bacon] [:blue :bacon]])
 
@@ -215,66 +197,7 @@
   ; => 20922789888000 (21 trillion)
   ; 8.2 trillion possibilities of legal starting plays
 
-  (defn blah [a s]
-    (into {} (map #([a %]) s)))
 
-    (loop [mx (max x y) mn (min x y) n mn]
-      (if (= 0 (mod mx n) (mod mn n))
-        n
-        (recur mx mn (dec n))))
 
-  (defn sometrue [& xs]
-    (and (not-every? false? xs) (not-every? true? xs)))
 
-  (defn alf [s]
-    (seq s))
-
-  (= (__ [1 2 3] 2) '(1 1 2 2 3 3))
-  (defn r [s n]
-    (mapcat #(repeat n %1) s))
-
-  (= (__ 0 [:a :b :c]) {:a 0 :b 0 :c 0})
-  (defn r [n s]
-    (apply hash-map (mapcat #(list % n) s)))
-
-  (= 256 (__ [2 5 6] [100 10 1]))                           ; dot product 143
-  (defn dp [s1 s2]
-    (->> (map vector s1 s2)
-         (map (fn [[x y]] (* x y)))
-         (apply +)))
-
-  (= (__ ["a" ["b"] "c"]) '("a" "b" "c"))                   ; flatten a seqence #28
-  (defn fas [& xs]
-    (when-let [s (seq xs)]
-      (concat (first s) (fas (rest s)))))
-  (= (__ 8) '(1 1 2 3 5 8 13 21))
-  (defn fibn [x]
-    (cond
-          (< x 1) nil
-          (= x 1) '(1)
-          :else (loop [x x s '(1 1)]
-                    (if (= x 2)
-                      s
-                      (recur (dec x) (apply concat s (+ (last s) (nth s (- (count s) 2)))))))))
-
-  (== (__ 7 5/7 2 3/5) 210)                                 ; Least common multiple #100
-
-  (defn lcm [& s]
-    (map #((first s) (second s)) s))
-
-  (= (__ [1 2 3 4 5 6 7 8] 3) [1 2 4 5 7 8])                ;drop every nth #41
-  (defn denth [s x]
-     (loop [newseq [] n 0]
-       (if  (= n (count s))
-         newseq
-         (recur
-           (if (not= 0 (mod (inc n) x))
-               (conj newseq (nth s n))
-               newseq)
-           (inc n)))))
-  (= (__ 3 [1 2 3 4 5 6]) [[1 2 3] [4 5 6]])                ; 49 Split a sequence.
-  (defn sas [x s]
-    (into [] (take x s))
-    )
   )
-
