@@ -19,20 +19,10 @@
   (when (apply = set)
     (first set)))
 
-(defn check4 [set]
+(defn qcheck4 [set]
   "Take in a set of 4 paired items.
   Check to see if any 3 contiguous items have a matching pattern in any color or shape.
-  Returns nil if nothing found, or the matched type."
-  (if (< (count set) 4)
-    nil
-    (or
-      (match3 (first (apply map vector (first (partition 3 1 set)))))
-      (match3 (first (apply map vector (second (partition 3 1 set)))))
-      (match3 (second (apply map vector (first (partition 3 1 set)))))
-      (match3 (second (apply map vector (second (partition 3 1 set))))))))
-
-(defn qcheck4 [set]
-  "Like check4 function, but quick and stops after the first."
+  Returns nil if nothing found, or returns the matching color or shape."
   (or
     (match3 (first (apply map vector (first (partition 3 1 set)))))
     (match3 (first (apply map vector (second (partition 3 1 set)))))
