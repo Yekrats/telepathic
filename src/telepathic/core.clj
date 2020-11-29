@@ -2,7 +2,11 @@
   (:gen-class)
   (:require [clojure.math.combinatorics :as combo]
             [clojure.string :as str]))
-
+(comment
+  ;;  TODO: Set of action cards.
+  ;;  TODO: Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
+  ;;
+  )
 (defn -main
   "I don't do a whole lot ... yet."
   [& args]
@@ -19,7 +23,7 @@
   (when (apply = set)
     (first set)))
 
-(defn qcheck4 [set]
+(defn check4 [set]
   "Take in a set of 4 paired items.
   Check to see if any 3 contiguous items have a matching pattern in any color or shape.
   Returns nil if nothing found, or returns the matching color or shape."
@@ -32,14 +36,14 @@
 (def perm "All the permutations of tiles." (combo/permutations tiles))
 
 (defn rot-90 [s]
-  "Takes a sequence of 16 vector pairs and rotates it 90°."
+  "Takes a sequence of 16 color/shape pairs and rotates it 90°."
   (vec (apply concat (apply mapv vector (partition 4 s)))))
 
 (defn any-row-match? [s]
-  "Performs qcheck4 function, taking the first row '(take 4 s)', then calling
+  "Performs check4 function, taking the first row '(take 4 s)', then calling
   itself recursively until all are taken."
   (when (seq s)
-    (or (qcheck4 (take 4 s)) (any-row-match? (drop 4 s)))))
+    (or (check4 (take 4 s)) (any-row-match? (drop 4 s)))))
 
 (defn any-col-match? [s]
   "The same as any-row-match? function, but performing a 90° rotation first,
@@ -60,14 +64,14 @@
   (seq [%4 %1 %2 %3]))
 
 (defn push-one-row-backwards [[%1 %2 %3 %4]]
-  [%2 %3 %4 %1])
+  (seq [%2 %3 %4 %1])
 
-(defn push-one-row-east [s rownum]
-  "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
-  (vec (apply concat (for [i (range 4)]
-                       (if (= i rownum)
-                         (push-one-row-forwards (take 4 (drop (* i 4) s)))
-                         (take 4 (drop (* i 4) s)))))))
+  (defn push-one-row-east [s rownum]
+    "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
+    (vec (apply concat (for [i (range 4)]
+                         (if (= i rownum)
+                           (push-one-row-forwards (take 4 (drop (* i 4) s)))
+                           (take 4 (drop (* i 4) s))))))))
 
 (defn push-one-row-west [s rownum]
   "Takes in a set of 16 tiles, and pushes one 'rownum' to the west."
