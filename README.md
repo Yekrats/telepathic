@@ -2,10 +2,6 @@
 
 Implementation of Carl Klutzke's "Telepathic" https://www.thegamecrafter.com/games/telepathic
 
-## Installation
-
-Download from http://example.com/FIXME.
-
 ## Usage
 
 FIXME: explanation
