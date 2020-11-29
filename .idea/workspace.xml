@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="458e8623-1ff1-4ff1-b654-779c75cd39e1" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/telepathic/core.clj" beforeDir="false" afterPath="$PROJECT_DIR$/src/telepathic/core.clj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/default+repl/classes/META-INF/maven/telepathic/telepathic/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/default+repl/classes/META-INF/maven/telepathic/telepathic/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/default+repl/stale/leiningen.core.classpath.extract-native-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/target/default+repl/stale/leiningen.core.classpath.extract-native-dependencies" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/project.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/telepathic/core.clj">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="331">
+              <caret line="149" column="33" selection-start-line="149" selection-start-column="33" selection-end-line="149" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>match3</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/test/telepathic/core_test.clj" />
+        <option value="$PROJECT_DIR$/project.clj" />
+        <option value="$PROJECT_DIR$/src/telepathic/core.clj" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1440" />
+    <option name="height" value="821" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="telepathic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="telepathic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="telepathic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="telepathic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="telepathic" type="b2602c69:ProjectViewProjectNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="telepathic" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1592933495387" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="diff.base" />
+  </component>
+  <component name="ReplState" timestamp="1605455510450">{:repl-history {:ide [], :local [{:command &quot;(  (fn sometrue [&amp; xs]\n     (and (some true? xs) (not-every? true? xs))) false false)&quot;, :offset 85, :ns &quot;telepathic.core&quot;} {:command &quot;(defn sometrue [&amp; xs]\n    (and (not-every? false? xs) (not-every? true? xs)))&quot;, :offset 77, :ns &quot;telepathic.core&quot;} {:command &quot;(  (defn sometrue [&amp; xs]\n     (and (not-every? false? xs) (not-every? true? xs))) false false)&quot;, :offset 94, :ns &quot;telepathic.core&quot;} {:command &quot;(  (defn sometrue [&amp; xs]\n     (and (not-every? false? xs) (not-every? true? xs))) true true)&quot;, :offset 92, :ns &quot;telepathic.core&quot;} {:command &quot;(  (defn sometrue [&amp; xs]\n     (and (not-every? false? xs) (not-every? true? xs))) true false false)&quot;, :offset 99, :ns &quot;telepathic.core&quot;} {:command &quot;(re-matches #\&quot;[A-Z]\&quot; s)&quot;, :offset 23, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [s] (re-matches #\&quot;[A-Z]\&quot; s))&quot;, :offset 38, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [s] (re-matches #\&quot;A\&quot; s))&quot;, :offset 34, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [s] (filter (re-matches #\&quot;[A-Z]\&quot; %) s))&quot;, :offset 49, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [s]\n    (filter #(re-matches #\&quot;[A-Z]\&quot; %) s))&quot;, :offset 54, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [&amp; s]\n    (filter #(re-matches #\&quot;[A-Z]\&quot; %) s))&quot;, :offset 56, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [s]\n    (filter #(re-matches #\&quot;[A-Z]\&quot; %) (seq s)))&quot;, :offset 60, :ns &quot;telepathic.core&quot;} {:command &quot;(defn alf [s]\n    (seq s))&quot;, :offset 26, :ns &quot;telepathic.core&quot;} {:command &quot;(alf \&quot;AbCdEfG\&quot;)&quot;, :offset 15, :ns &quot;telepathic.core&quot;} {:command &quot;(defn [s n]\n    (map repeat n s)\n    )&quot;, :offset 38, :ns &quot;telepathic.core&quot;} {:command &quot;(defn [s n]\n    (map #(repeat n %1) s))&quot;, :offset 39, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [s n]\n    (map #(repeat n %1) s))&quot;, :offset 41, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [s n]\n    (concat (map #(repeat n %1) s)))&quot;, :offset 50, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [s n]\n    (mapcat #(repeat n %1) s))&quot;, :offset 44, :ns &quot;telepathic.core&quot;} {:command &quot;(r [1 2 3] 2)&quot;, :offset 13, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (mapcat #[n %] s))&quot;, :offset 36, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (mapcat #([n %]) s))&quot;, :offset 38, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (mapcat #(n %) s))&quot;, :offset 36, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (map #(n %) s))&quot;, :offset 33, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (mapcat #(list n %) s))&quot;, :offset 41, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (apply hash-map (mapcat #(list n %) s)))&quot;, :offset 58, :ns &quot;telepathic.core&quot;} {:command &quot;(defn r [n s]\n    (apply hash-map (mapcat #(list % n) s)))&quot;, :offset 58, :ns &quot;telepathic.core&quot;} {:command &quot;(r 0 [:a :b :c])&quot;, :offset 16, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (map s1 s2))&quot;, :offset 33, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (apply map vector s1 s2))&quot;, :offset 46, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (map vector s1 s2))&quot;, :offset 40, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (fn [x y] (* x y) (map vector s1 s2)))&quot;, :offset 59, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    apply (fn [x y] (* x y) (map vector s1 s2)))&quot;, :offset 65, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    map (fn [x y] (* x y) (map vector s1 s2)))&quot;, :offset 63, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (map (fn [x y] (* x y)) (map vector s1 s2)))&quot;, :offset 65, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (apply (fn [x y] (* x y)) (map vector s1 s2)))&quot;, :offset 67, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (apply (fn [[x y]] (* x y)) (map vector s1 s2)))&quot;, :offset 69, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (mapcat #(* %1 %2) (map vector s1 s2)))&quot;, :offset 60, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt; (map vector s1 s2))\n    )&quot;, :offset 50, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt;&gt; (map vector s1 s2))\n        (fn [[x y]] (* x y))\n    )&quot;, :offset 80, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt;&gt; (map vector s1 s2)\n         (fn [[x y]] (* x y))))&quot;, :offset 76, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt;&gt; (map vector s1 s2)\n         (apply (fn [[x y]] (* x y)))))&quot;, :offset 84, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt;&gt; (map vector s1 s2)\n         (mapcat (fn [[x y]] (* x y)))))&quot;, :offset 85, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt;&gt; (map vector s1 s2)\n         (map (fn [[x y]] (* x y)))))&quot;, :offset 82, :ns &quot;telepathic.core&quot;} {:command &quot;(defn dp [s1 s2]\n    (-&gt;&gt; (map vector s1 s2)\n         (map (fn [[x y]] (* x y)))\n         (apply +)))&quot;, :offset 101, :ns &quot;telepathic.core&quot;} {:command &quot;(dp [2 5 6] [100 10 1])&quot;, :offset 23, :ns &quot;telepathic.core&quot;} {:command &quot;(defn p [&amp; s]\n    (-&gt;&gt; (apply * s)\n         (apply str))\n    )&quot;, :offset 62, :ns &quot;telepathic.core&quot;} {:command &quot;(defn p [&amp; s]\n    (-&gt;&gt; (apply * s)\n         (str))\n    )&quot;, :offset 56, :ns &quot;telepathic.core&quot;} {:command &quot;(defn p [&amp; s]\n    (-&gt;&gt; (apply * s)\n         str\n         seq)\n    )&quot;, :offset 67, :ns &quot;telepathic.core&quot;} {:command &quot;(-&gt;&gt; (apply * s)\n         str\n         seq\n         (apply Integer/parseInt))&quot;, :offset 77, :ns &quot;telepathic.core&quot;} {:command &quot;(defn p [&amp; s]\n    (-&gt;&gt; (apply * s)\n         str\n         seq\n         Integer/parseInt)\n    )&quot;, :offset 93, :ns &quot;telepathic.core&quot;} {:command &quot;(p 99 99)&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fas [&amp; xs]\n    (apply mapcat xs)\n    )&quot;, :offset 44, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fas [&amp; xs]\n    (apply concat xs)\n    )&quot;, :offset 44, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fas [&amp; xs]\n    (mapcat concat xs))&quot;, :offset 40, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fas [&amp; xs]\n    (concat (first xs) (fas (rest xs))))&quot;, :offset 57, :ns &quot;telepathic.core&quot;} {:command &quot;(if (rest '()) \&quot;Yes\&quot; \&quot;No\&quot;)&quot;, :offset 26, :ns &quot;telepathic.core&quot;} {:command &quot;(seq '())&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fas [&amp; xs]\n    (when (seq xs)\n      (concat (first xs) (fas (rest xs)))))&quot;, :offset 79, :ns &quot;telepathic.core&quot;} {:command &quot;(rest [\&quot;a\&quot; [\&quot;b\&quot;] \&quot;c\&quot;])&quot;, :offset 22, :ns &quot;telepathic.core&quot;} {:command &quot;(concat (first [\&quot;a\&quot; [\&quot;b\&quot;] \&quot;c\&quot;]) (concat (first (rest [\&quot;a\&quot; [\&quot;b\&quot;] \&quot;c\&quot;]))))&quot;, :offset 72, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fas [&amp; xs]\n    (when-let [s (seq xs)]\n      (concat (first s) (fas (rest s)))))&quot;, :offset 85, :ns &quot;telepathic.core&quot;} {:command &quot;(fas [\&quot;a\&quot; [\&quot;b\&quot;] \&quot;c\&quot;])&quot;, :offset 21, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fibn [x]\n    (cond x\n          (&lt; x 1) nil\n          (= x 1) '(1)\n          (&gt; x 1) (loop [x x s '(1 1)]\n                    (if (= x 2)\n                      s\n                      (recur (dec x) (concat s (+ (last s) (nth s (dec (count s)))))))\n                    )\n\n      )\n    )&quot;, :offset 290, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fibn [x]\n    (cond x\n          (&lt; x 1) nil\n          (= x 1) '(1)\n          :else (loop [x x s '(1 1)]\n                    (if (= x 2)\n                      s\n                      (recur (dec x) (concat s (+ (last s) (nth s (dec (count s)))))))\n                    )\n\n      )\n    )&quot;, :offset 288, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fibn [x]\n    (cond\n          (&lt; x 1) nil\n          (= x 1) '(1)\n          :else (loop [x x s '(1 1)]\n                    (if (= x 2)\n                      s\n                      (recur (dec x) (concat s (+ (last s) (nth s (dec (count s)))))))\n                    )\n\n      )\n    )&quot;, :offset 286, :ns &quot;telepathic.core&quot;} {:command &quot;(fibn 1)&quot;, :offset 8, :ns &quot;telepathic.core&quot;} {:command &quot;(fibn 2)&quot;, :offset 8, :ns &quot;telepathic.core&quot;} {:command &quot;(defn fibn [x]\n    (cond\n          (&lt; x 1) nil\n          (= x 1) '(1)\n          :else (loop [x x s '(1 1)]\n                    (if (= x 2)\n                      s\n                      (recur (dec x) (apply concat s (+ (last s) (nth s (dec (count s)))))))\n                    )\n\n      )\n    )&quot;, :offset 292, :ns &quot;telepathic.core&quot;} {:command &quot;(fibn 3)&quot;, :offset 8, :ns &quot;telepathic.core&quot;} {:command &quot;(count '( 1 2 3))&quot;, :offset 17, :ns &quot;telepathic.core&quot;} {:command &quot;(nth '(1 2 3) 2)&quot;, :offset 16, :ns &quot;telepathic.core&quot;} {:command &quot;(defn lcm [&amp; s]\n    (map #(%1 %2) s))&quot;, :offset 37, :ns &quot;telepathic.core&quot;} {:command &quot;(defn lcm [&amp; s]\n    (map #((first s) (second s)) s))&quot;, :offset 52, :ns &quot;telepathic.core&quot;} {:command &quot;(lcm 1 2 7)&quot;, :offset 11, :ns &quot;telepathic.core&quot;} {:command &quot;(count \&quot;abc\&quot;)&quot;, :offset 13, :ns &quot;telepathic.core&quot;} {:command &quot;(nth \&quot;abc\&quot; 2)&quot;, :offset 13, :ns &quot;telepathic.core&quot;} {:command &quot;(defn denth [s x]\n     (loop [newseq [] n 0]\n       (if  (= n (count s))\n         newseq\n         (recur \n           (if (not= 0 (mod (inc n) x))\n               (conj newseq (nth s n)))\n           (inc n)))))&quot;, :offset 208, :ns &quot;telepathic.core&quot;} {:command &quot;(mod 1 8)&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(mod 1 3)&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(mod 2 3)&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(mod 3 3)&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(mod 4 3)&quot;, :offset 9, :ns &quot;telepathic.core&quot;} {:command &quot;(defn denth [s x]\n     (loop [newseq [] n 0]\n       (if  (= n (count s))\n         newseq\n         (recur\n           (if (not= 0 (mod (inc n) x))\n               (conj newseq (nth s n))\n               (newseq))\n           (inc n)))))&quot;, :offset 231, :ns &quot;telepathic.core&quot;} {:command &quot;\n(denth [1 2 3 4 5 6 7 8] 3)&quot;, :offset 28, :ns &quot;telepathic.core&quot;} {:command &quot;(defn denth [s x]\n     (loop [newseq [] n 0]\n       (if  (= n (count s))\n         newseq\n         (recur\n           (if (not= 0 (mod (inc n) x))\n               (conj newseq (nth s n))\n               newseq)\n           (inc n)))))&quot;, :offset 229, :ns &quot;telepathic.core&quot;} {:command &quot;(denth [1 2 3 4 5 6 7 8] 3)&quot;, :offset 27, :ns &quot;telepathic.core&quot;} {:command &quot;(range 10)&quot;, :offset 10, :ns &quot;telepathic.core&quot;} {:command &quot;(defn capitalize-key [k]\n  (str k))&quot;, :offset 35, :ns &quot;telepathic.core&quot;} {:command &quot;(defn capitalize-key [k]\n  (rest (str k)))&quot;, :offset 42, :ns &quot;telepathic.core&quot;} {:command &quot;(defn capitalize-key [k]\n  (name k))&quot;, :offset 36, :ns &quot;telepathic.core&quot;} {:command &quot;(defn capitalize-key [k]\n  (capitalize (name k)))&quot;, :offset 49, :ns &quot;telepathic.core&quot;} {:command &quot;(ns telepathic.core\n  (:gen-class)\n  (:require [clojure.math.combinatorics :as combo])\n            [clojure.string :as str])&quot;, :offset 124, :ns &quot;telepathic.core&quot;} {:command &quot;(ns telepathic.core\n  (:gen-class)\n  (:require [clojure.math.combinatorics :as combo]\n            [clojure.string :as str]))&quot;, :offset 124, :ns &quot;telepathic.core&quot;} {:command &quot;(defn capitalize-key [k]\n  (str/capitalize (name k)))&quot;, :offset 53, :ns &quot;telepathic.core&quot;} {:command &quot;(defn capitalize-key [k]\n  \&quot;Feed it a keyname, it returns the name back capitalized. [:blue =&gt; 'Blue'].\&quot;\n  (str/capitalize (name k)))&quot;, :offset 133, :ns &quot;telepathic.core&quot;} {:command &quot;(defn asset-name [c s]\n  \&quot;Takes in a key-pair (color &amp; shape). Returns the name of the asset.\&quot; ; :green :bacon =&gt; \&quot;Green Bacon.png\&quot;\n  (str (capitalize-key c) \&quot; \&quot; (capitalize-key s)))&quot;, :offset 182, :ns &quot;telepathic.core&quot;} {:command &quot;(capitalize-key :blue)&quot;, :offset 22, :ns &quot;telepathic.core&quot;} {:command &quot;(defn asset-name [c s]\n  \&quot;Takes in a key-pair (color &amp; shape). Returns the name of the asset.\&quot; ; :green :bacon =&gt; \&quot;Green Bacon.png\&quot;\n  (str (capitalize-key c) \&quot; \&quot; (capitalize-key s) \&quot;.png\&quot;))&quot;, :offset 189, :ns &quot;telepathic.core&quot;} {:command &quot;(asset-name :blue :bacon)&quot;, :offset 25, :ns &quot;telepathic.core&quot;}], :remote []}}</component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="Unnamed" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <module name="telepathic" />
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="$PROJECT_DIR$" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <module name="" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="0" />
+      <module name="" />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="458e8623-1ff1-4ff1-b654-779c75cd39e1" name="Default Changelist" comment="" />
+      <created>1592243160609</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1592243160609</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1440" height="821" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.29682997" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="1" />
+      <window_info anchor="bottom" id="Event Log" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="3" />
+      <window_info anchor="bottom" id="Message" order="4" />
+      <window_info anchor="bottom" id="Find" order="5" />
+      <window_info anchor="bottom" id="Run" order="6" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info active="true" anchor="bottom" x="571" y="47" width="458" height="710" id="REPL" order="11" side_tool="true" visible="true" weight="0.49154928" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="1" />
+      <window_info anchor="right" id="Leiningen" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Maven Projects" order="5" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="6" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="8" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/telepathic/core_test.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="42" lean-forward="true" selection-start-line="2" selection-start-column="42" selection-end-line="2" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/project.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/telepathic/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="331">
+          <caret line="149" column="33" selection-start-line="149" selection-start-column="33" selection-end-line="149" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.39544103" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
