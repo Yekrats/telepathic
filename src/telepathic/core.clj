@@ -3,8 +3,17 @@
   (:require [clojure.math.combinatorics :as combo]
             [clojure.string :as str]))
 (comment
-  ;;  TODO: Set of action cards.
-  ;;  TODO: Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
+  ;;  TODO Set of action cards.
+  ;;  TODO Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
+  ;;  TODO Function tests whether game is won based on board state & player conditions.
+  ;;  TODO Function tests whether game is lost based on board state & player conditions.
+  ;;  TODO Game sequence:
+  ;;  TODO 1. Start with color player.
+  ;;  TODO 2. Current player selects action card.
+  ;;  TODO 3. Shape player applies action card to the the game state.
+  ;;  TODO 4. Check to see if the game is lost, and conclude the game if it is.
+  ;;  TODO 5. Either player may make an Announcemnt.
+  ;;  TODO 6. If no announcement is made, the other player begins their turn.
   ;;
   )
 (defn -main
@@ -20,7 +29,7 @@
 
 (defn match3
   "Checks all the members of a set. If all match, return that value. Otherwise return nil."
-[set]
+  [set]
   (when (apply = set)
     (first set)))
 
@@ -28,7 +37,7 @@
   "Take in a set of 4 paired items.
   Check to see if any 3 contiguous items have a matching pattern in any color or shape.
   Returns nil if nothing found, or returns the matching color or shape."
-[set]
+  [set]
   (or
     (match3 (first (apply map vector (first (partition 3 1 set)))))
     (match3 (first (apply map vector (second (partition 3 1 set)))))
@@ -39,57 +48,57 @@
 
 (defn rot-90
   "Takes a sequence of 16 color/shape pairs and rotates it 90°."
-[s]
+  [s]
   (vec (apply concat (apply mapv vector (partition 4 s)))))
 
 (defn any-row-match?
   "Performs check4 function, taking the first row '(take 4 s)', then calling
   itself recursively until all are taken."
- [s]
+  [s]
   (when (seq s)
     (or (check4 (take 4 s)) (any-row-match? (drop 4 s)))))
 
 (defn any-col-match?
   "The same as any-row-match? function, but performing a 90° rotation first,
   to capture columns."
-[s]
-  (any-row-match? (rot-90 s)))
+  [s] (any-row-match? (rot-90 s)))
 
 (defn any-rc-match?
   "Do any row or column have a matching set of 3?"
-[s] ((some-fn any-row-match? any-col-match?) s))
+  [s] ((some-fn any-row-match? any-col-match?) s))
 
 (defn test-each-row
   "Returns sequence of matched 3s in the 4 rows"
-[s] (flatten (when (seq s)
+  [s] (flatten (when (seq s)
              (conj [] (check4 (take 4 s)) (test-each-row (drop 4 s))))))
 
 (defn push-one-row-forwards
   "Inputs a set of 4, outputs set pushed by one."
-[[%1 %2 %3 %4]]
+  [[%1 %2 %3 %4]]
   (seq [%4 %1 %2 %3]))
 
-(defn push-one-row-backwards [[%1 %2 %3 %4]]
+(defn push-one-row-backwards
+  [[%1 %2 %3 %4]]
   (seq [%2 %3 %4 %1])
 
-  (defn push-one-row-east
-    "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
-[s rownum]
-    (vec (apply concat (for [i (range 4)]
-                         (if (= i rownum)
-                           (push-one-row-forwards (take 4 (drop (* i 4) s)))
-                           (take 4 (drop (* i 4) s))))))))
+(defn push-one-row-east
+  "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
+  [s rownum]
+  (vec (apply concat (for [i (range 4)]
+                       (if (= i rownum)
+                         (push-one-row-forwards (take 4 (drop (* i 4) s)))
+                         (take 4 (drop (* i 4) s))))))))
 
 (defn push-one-row-west
   "Takes in a set of 16 tiles, and pushes one 'rownum' to the west."
-[s rownum]
+  [s rownum]
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
                          (push-one-row-backwards (take 4 (drop (* i 4) s)))
                          (take 4 (drop (* i 4) s)))))))
 
 (defn push-one-row-north   "Takes in a set of 16 tiles, and pushes one 'colnum' to the north."
-[s colnum]
+  [s colnum]
   (rot-90 (push-one-row-west (rot-90 s) colnum)))
 
 (defn push-one-row-south   "Takes in a set of 16 tiles, and pushes one 'colnum' to the south."
@@ -101,7 +110,6 @@
   (not (empty? (filter identity (map #(any-rc-match? (push-one-row-east s %)) (range 4))))))
 
 (defn test-push-west? "Apply 'push west' on each row, and checks for any-rc-match? after each push." [s]
-
   (not (empty? (filter identity (map #(any-rc-match? (push-one-row-west s %)) (range 4))))))
 
 (defn test-push-south? [s]
@@ -140,8 +148,7 @@
       (if (> i 999)
         i
         set)
-      (recur (shuffle tiles) (inc i))))
-  )
+      (recur (shuffle tiles) (inc i)))))
 
 (defn capitalize-key   "Feed it a keyname, it returns the name back capitalized. [:blue => 'Blue']."
   [k]
