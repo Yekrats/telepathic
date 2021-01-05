@@ -3,17 +3,17 @@
   (:require [clojure.math.combinatorics :as combo]
             [clojure.string :as str]))
 (comment
-  ;;  TODO Set of action cards.
+  ;;  DONE Set of action cards.
   ;;  TODO Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
   ;;  TODO Function tests whether game is won based on board state & player conditions.
   ;;  TODO Function tests whether game is lost based on board state & player conditions.
   ;;  TODO Game sequence:
   ;;  TODO 1. Start with color player.
   ;;  TODO 2. Current player selects action card.
-  ;;  TODO 3. Shape player applies action card to the the game state.
+  ;;  TODO 3. Other player applies action card to the the game state.
   ;;  TODO 4. Check to see if the game is lost, and conclude the game if it is.
   ;;  TODO 5. Either player may make an Announcemnt.
-  ;;  TODO 6. If no announcement is made, the other player begins their turn.
+  ;;  TODO 6. If no announcement is made, the other player begins their turn as the current player.
   ;;
   )
 (defn -main
@@ -21,13 +21,20 @@
   [& args]
   (println "Hello, World!"))
 
+(def players [:color-player :shape-player])
+
 (def colors [:purple :blue :green :orange])
 
 (def shapes [:plus :circle :star :bacon])
 
+(def actions [:row-east :row-west :col-north :col-south])
+
 (def tiles (vec (apply concat (into [] (for [color colors] (into [] (for [shape shapes] [color shape]))))))) ; added (apply concat ...) to flatten one level. -- sws
 
-(defn match3
+(defn condition-cards [cards]
+  (vec (take 2 (shuffle cards))))
+
+(defn all-match?
   "Checks all the members of a set. If all match, return that value. Otherwise return nil."
   [set]
   (when (apply = set)
@@ -39,12 +46,12 @@
   Returns nil if nothing found, or returns the matching color or shape."
   [set]
   (or
-    (match3 (first (apply map vector (first (partition 3 1 set)))))
-    (match3 (first (apply map vector (second (partition 3 1 set)))))
-    (match3 (second (apply map vector (first (partition 3 1 set)))))
-    (match3 (second (apply map vector (second (partition 3 1 set)))))))
+    (all-match? (first (apply map vector (first (partition 3 1 set)))))
+    (all-match? (first (apply map vector (second (partition 3 1 set)))))
+    (all-match? (second (apply map vector (first (partition 3 1 set)))))
+    (all-match? (second (apply map vector (second (partition 3 1 set)))))))
 
-(def perm "All the permutations of tiles." (combo/permutations tiles))
+;; (def perm "All the permutations of tiles." (combo/permutations tiles))
 
 (defn rot-90
   "Takes a sequence of 16 color/shape pairs and rotates it 90°."
@@ -79,7 +86,7 @@
 
 (defn push-one-row-backwards
   [[%1 %2 %3 %4]]
-  (seq [%2 %3 %4 %1])
+  (seq [%2 %3 %4 %1]))
 
 (defn push-one-row-east
   "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
@@ -87,7 +94,7 @@
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
                          (push-one-row-forwards (take 4 (drop (* i 4) s)))
-                         (take 4 (drop (* i 4) s))))))))
+                         (take 4 (drop (* i 4) s)))))))
 
 (defn push-one-row-west
   "Takes in a set of 16 tiles, and pushes one 'rownum' to the west."
@@ -107,16 +114,16 @@
 
 (defn test-push-east?   "Apply 'push west' on each row, and checks for any-rc-match? after each push."
   [s]
-  (not (empty? (filter identity (map #(any-rc-match? (push-one-row-east s %)) (range 4))))))
+  (seq (filter identity (map #(any-rc-match? (push-one-row-east s %)) (range 4)))))
 
 (defn test-push-west? "Apply 'push west' on each row, and checks for any-rc-match? after each push." [s]
-  (not (empty? (filter identity (map #(any-rc-match? (push-one-row-west s %)) (range 4))))))
+  (seq (filter identity (map #(any-rc-match? (push-one-row-west s %)) (range 4)))))
 
 (defn test-push-south? [s]
-  (not (empty? (filter identity (map #(any-rc-match? (push-one-row-south s %)) (range 4))))))
+  (seq (filter identity (map #(any-rc-match? (push-one-row-south s %)) (range 4)))))
 
 (defn test-push-north? [s]
-  (not (empty? (filter identity (map #(any-rc-match? (push-one-row-north s %)) (range 4))))))
+  (seq (filter identity (map #(any-rc-match? (push-one-row-north s %)) (range 4)))))
 
 (defn test-each-column   "Returns sequence of matched 3s in the 4 columns" [s]
   (test-each-row (rot-90 s)))
@@ -142,13 +149,7 @@
 (defn card-tests? [s]
   (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
 
-(def tougher-sls
-  (loop [set (shuffle tiles) i 0]
-    (if (or (not (card-tests? set)) (> i 999))
-      (if (> i 999)
-        i
-        set)
-      (recur (shuffle tiles) (inc i)))))
+
 
 (defn capitalize-key   "Feed it a keyname, it returns the name back capitalized. [:blue => 'Blue']."
   [k]
@@ -157,7 +158,7 @@
 (defn asset-name
   "Takes in a key-pair (color & shape). Returns the name of the asset." ; :green :bacon => "Green Bacon.png"
   [c s]
-  (str (capitalize-key c) " " (capitalize-key s) ".png"))
+  (str (str/capitalize (name c)) " " (str/capitalize (name s)) ".png"))
 
 (comment
   (check4 sample1)
@@ -183,20 +184,6 @@
     )
 
   (any-rc-match? shuffled-set)
-
-  (def sls                                                  ; shuffled-legal-start
-    (loop [set (shuffle tiles) i 0]
-      (if (or (not (any-rc-match? set)) (> i 100))
-        (if (> i 99)
-          i
-          set)
-        (recur (shuffle tiles) (inc i)))))
-  (defn anols [times-to-try]                                ; approx number of legal sets
-    (loop [n times-to-try legal 0 set (shuffle tiles)]
-      (if (> n 0)
-        (recur (dec n) (if (any-rc-match? set) legal (inc legal)) (shuffle tiles))
-        (float (/ legal times-to-try))
-        )))
 
   (def sample1 [[:purple :plus] [:purple :circle] [:purple :star] [:orange :star]])
 
