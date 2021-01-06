@@ -85,11 +85,12 @@
   (seq [%4 %1 %2 %3]))
 
 (defn push-one-row-backwards
+  "Inputs a set of 4, outputs set pushed backwards by one."
   [[%1 %2 %3 %4]]
   (seq [%2 %3 %4 %1]))
 
 (defn push-one-row-east
-  "Takes in a set of 16 tiles, and pushes one 'rownum' to the east."
+  "Takes in a set of 16 tiles (s), and pushes one 'rownum' to the east."
   [s rownum]
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
@@ -97,7 +98,7 @@
                          (take 4 (drop (* i 4) s)))))))
 
 (defn push-one-row-west
-  "Takes in a set of 16 tiles, and pushes one 'rownum' to the west."
+  "Takes in a set of 16 tiles (s), and pushes one 'rownum' to the west."
   [s rownum]
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
@@ -112,17 +113,17 @@
   [s colnum]
   (rot-90 (push-one-row-east (rot-90 s) colnum)))
 
-(defn test-push-east?   "Apply 'push west' on each row, and checks for any-rc-match? after each push."
+(defn test-push-east?   "Apply 'push east' on each row, and checks any-rc-match? after push."
   [s]
   (seq (filter identity (map #(any-rc-match? (push-one-row-east s %)) (range 4)))))
 
-(defn test-push-west? "Apply 'push west' on each row, and checks for any-rc-match? after each push." [s]
+(defn test-push-west? "Apply 'push west' on each row, and checks any-rc-match? after push." [s]
   (seq (filter identity (map #(any-rc-match? (push-one-row-west s %)) (range 4)))))
 
-(defn test-push-south? [s]
+(defn test-push-south? "Apply 'push south' on each column, and checks any-rc-match? after push." [s]
   (seq (filter identity (map #(any-rc-match? (push-one-row-south s %)) (range 4)))))
 
-(defn test-push-north? [s]
+(defn test-push-north? "Apply 'push north' on each column, and checks any-rc-match? after push." [s]
   (seq (filter identity (map #(any-rc-match? (push-one-row-north s %)) (range 4)))))
 
 (defn test-each-column   "Returns sequence of matched 3s in the 4 columns" [s]
@@ -131,25 +132,13 @@
 (defn test-rc [s]
   (remove #(nil? %) (concat (test-each-row s) (test-each-column s))))
 
-(def sls                                                  ; shuffled-legal-start
+(def sls                                                  ; A shuffled-legal-start for testing purposes.
   (loop [set (shuffle tiles) i 0]
     (if (or (not (any-rc-match? set)) (> i 100))
       (if (> i 99)
         i
         set)
       (recur (shuffle tiles) (inc i)))))
-
-(defn anols [times-to-try]                                ; approx number of legal sets
-  (loop [n times-to-try legal 0 set (shuffle tiles)]
-    (if (> n 0)
-      (recur (dec n) (if (any-rc-match? set) legal (inc legal)) (shuffle tiles))
-      (float (/ legal times-to-try))
-      )))
-
-(defn card-tests? [s]
-  (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
-
-
 
 (defn capitalize-key   "Feed it a keyname, it returns the name back capitalized. [:blue => 'Blue']."
   [k]
@@ -192,6 +181,18 @@
   (combo/count-permutations tiles)
   ; => 20922789888000 (21 trillion)
   ; 8.2 trillion possibilities of legal starting plays
+  (defn anols
+    "'Approximate number of legal sets'. Used to compute an approximation as % of legal plays."
+    [times-to-try]                                ; approx number of legal sets
+    (loop [n times-to-try legal 0 set (shuffle tiles)]
+      (if (> n 0)
+        (recur (dec n) (if (any-rc-match? set) legal (inc legal)) (shuffle tiles))
+        (float (/ legal times-to-try))
+        )))
+
+  (defn card-tests? [s]
+    (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
+
 
 
 
