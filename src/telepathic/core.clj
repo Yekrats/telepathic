@@ -29,10 +29,21 @@
 
 (def actions [:row-east :row-west :col-north :col-south])
 
+(def play-state
+  {:color-player
+      { :win  :empty
+        :lose :empty }
+   :shape-player
+      { :win  :empty
+        :lose :empty }
+   :board
+      []})
+
 (def tiles (vec (apply concat (into [] (for [color colors] (into [] (for [shape shapes] [color shape]))))))) ; added (apply concat ...) to flatten one level. -- sws
 
 (defn condition-cards [cards]
-  (vec (take 2 (shuffle cards))))
+  (zipmap [:win :lose] (take 2 (shuffle cards))))
+
 
 (defn all-match?
   "Checks all the members of a set. If all match, return that value. Otherwise return nil."
@@ -129,7 +140,8 @@
 (defn test-each-column   "Returns sequence of matched 3s in the 4 columns" [s]
   (test-each-row (rot-90 s)))
 
-(defn test-rc [s]
+(defn test-rc "Tests each row and column. Returns a list of matched keys."
+  [s]
   (remove #(nil? %) (concat (test-each-row s) (test-each-column s))))
 
 (def sls                                                  ; A shuffled-legal-start for testing purposes.
@@ -140,9 +152,11 @@
         set)
       (recur (shuffle tiles) (inc i)))))
 
-(defn capitalize-key   "Feed it a keyname, it returns the name back capitalized. [:blue => 'Blue']."
-  [k]
-  (str/capitalize (name k)))
+(defn generate-play-state []
+  {:color-player (condition-cards colors)
+   :shape-player (condition-cards shapes)
+   :board sls})
+
 
 (defn asset-name
   "Takes in a key-pair (color & shape). Returns the name of the asset." ; :green :bacon => "Green Bacon.png"
@@ -150,16 +164,6 @@
   (str (str/capitalize (name c)) " " (str/capitalize (name s)) ".png"))
 
 (comment
-  (check4 sample1)
-  (check4 samplefail)
-  (test-each-row (nth tperm 100))
-  (test-each-row (rot-90 (nth tperm 100)))
-  (def tp9 (nth tperm 999999))
-  (def tpr (nth tperm (rand-int 9999999)))
-  (def tpr9 (rot-90 tp9))
-  (test-rc tp9)
-  (any-rc-match? tp9)
-  (def tprf (nth tpermf (rand-int 999)))
   (def shuff1
     [[:purple :plus] [:green :bacon] [:blue :star] [:orange :circle]
      [:green :circle] [:blue :plus] [:orange :bacon] [:purple :star]
@@ -171,8 +175,6 @@
      [:purple :star] [:orange :circle] [:purple :plus] [:green :bacon]
      [:orange :bacon] [:purple :star] [:green :circle] [:purple :plus]]
     )
-
-  (any-rc-match? shuffled-set)
 
   (def sample1 [[:purple :plus] [:purple :circle] [:purple :star] [:orange :star]])
 
