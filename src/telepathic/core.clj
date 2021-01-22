@@ -1,12 +1,13 @@
 (ns telepathic.core
   (:gen-class)
   (:require [clojure.math.combinatorics :as combo]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [clojure.set :as s]))
 (comment
   ;;  DONE Set of action cards.
-  ;;  TODO Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
+  ;;  DONE Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
   ;;  TODO Function tests whether game is won based on board state & player conditions.
-  ;;  TODO Function tests whether game is lost based on board state & player conditions.
+  ;;  DONE Function tests whether game is lost based on board state & player conditions.
   ;;  TODO Game sequence:
   ;;  TODO 1. Start with color player.
   ;;  TODO 2. Current player selects action card.
@@ -163,6 +164,26 @@
   [c s]
   (str (str/capitalize (name c)) " " (str/capitalize (name s)) ".png"))
 
+(defn play-state-losing?
+  "Evaluates a play state, to see if either players' lose condition is present.
+  Returns true/false."
+  [state]
+  (not-empty (s/intersection
+              #{(:lose (:color-player state)) (:lose (:shape-player state))}
+              (set (test-rc (:board state))))))
+
+(defn play-state-winning?
+  "Evaluates a play state, to see if it's in a possible win condition --
+  i.e., both players have win condition present. Returns true/false."
+  [state]
+  (let [board (test-rc (:board state))]
+    (and
+     (some #(= % (:win (:color-player state)))
+                      board)
+    (some #(= % (:win (:shape-player state)))
+                      board)
+     )))
+
 (comment
   (def shuff1
     [[:purple :plus] [:green :bacon] [:blue :star] [:orange :circle]
@@ -196,6 +217,10 @@
     (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
 
 
+  (def winning-state
+    {:color-player {:win :green, :lose :orange},
+ :shape-player {:win :plus, :lose :star},
+ :board tiles})
 
 
 
