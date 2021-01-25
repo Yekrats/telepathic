@@ -6,9 +6,19 @@
 (comment
   ;;  DONE Set of action cards.
   ;;  DONE Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
-  ;;  TODO Function tests whether game is won based on board state & player conditions.
+  ;;  DONE Function tests whether game is won based on board state & player conditions.
   ;;  DONE Function tests whether game is lost based on board state & player conditions.
-  ;;  TODO Game sequence:
+  ;;  TODO Deck of action cards
+  ;;  TODO 4 random displayed action cards
+  ;;  TODO Pretty display of the grid (board).
+  ;;  TODO EW-Do-si-do function.
+  ;;  TODO NS-Do-si-do function.
+  ;;  DONE EW-Mirror function.
+  ;;  DONE NS-Mirror function.
+  ;;  TODO Corner-clockwise function.
+  ;;  TODO Corner-counterclockwise function.
+  ;;
+  ;;       Game sequence:
   ;;  TODO 1. Start with color player.
   ;;  TODO 2. Current player selects action card.
   ;;  TODO 3. Other player applies action card to the the game state.
@@ -83,7 +93,7 @@
   [s] (any-row-match? (rot-90 s)))
 
 (defn any-rc-match?
-  "Do any row or column have a matching set of 3?"
+  "Do any row or column have a matching set [s] of 3?"
   [s] ((some-fn any-row-match? any-col-match?) s))
 
 (defn test-each-row
@@ -125,18 +135,18 @@
   [s colnum]
   (rot-90 (push-one-row-east (rot-90 s) colnum)))
 
-(defn test-push-east?   "Apply 'push east' on each row, and checks any-rc-match? after push."
-  [s]
-  (seq (filter identity (map #(any-rc-match? (push-one-row-east s %)) (range 4)))))
+(defn ew-mirror
+  "Takes in a set of 16 tiles (s), and mirrors one east-west row."
+  [s rownum]
+  (vec (apply concat (for [i (range 4)]
+                       (if (= i rownum)
+                         (reverse (take 4 (drop (* i 4) s)))
+                         (take 4 (drop (* i 4) s)))))))
 
-(defn test-push-west? "Apply 'push west' on each row, and checks any-rc-match? after push." [s]
-  (seq (filter identity (map #(any-rc-match? (push-one-row-west s %)) (range 4)))))
+(defn ns-mirror   "Takes in a set of 16 tiles, and mirrors one north-south column."
+  [s colnum]
+  (rot-90 (ew-mirror (rot-90 s) colnum)))
 
-(defn test-push-south? "Apply 'push south' on each column, and checks any-rc-match? after push." [s]
-  (seq (filter identity (map #(any-rc-match? (push-one-row-south s %)) (range 4)))))
-
-(defn test-push-north? "Apply 'push north' on each column, and checks any-rc-match? after push." [s]
-  (seq (filter identity (map #(any-rc-match? (push-one-row-north s %)) (range 4)))))
 
 (defn test-each-column   "Returns sequence of matched 3s in the 4 columns" [s]
   (test-each-row (rot-90 s)))
@@ -177,12 +187,8 @@
   i.e., both players have win condition present. Returns true/false."
   [state]
   (let [board (test-rc (:board state))]
-    (and
-     (some #(= % (:win (:color-player state)))
-                      board)
-    (some #(= % (:win (:shape-player state)))
-                      board)
-     )))
+    (and (some #(= % (:win (:color-player state))) board)
+         (some #(= % (:win (:shape-player state))) board))))
 
 (comment
   (def shuff1
@@ -223,5 +229,17 @@
  :board tiles})
 
 
+(defn test-push-east?   "Apply 'push east' on each row, and checks any-rc-match? after push."
+  [s]
+  (seq (filter identity (map #(any-rc-match? (push-one-row-east s %)) (range 4)))))
+
+(defn test-push-west? "Apply 'push west' on each row, and checks any-rc-match? after push." [s]
+  (seq (filter identity (map #(any-rc-match? (push-one-row-west s %)) (range 4)))))
+
+(defn test-push-south? "Apply 'push south' on each column, and checks any-rc-match? after push." [s]
+  (seq (filter identity (map #(any-rc-match? (push-one-row-south s %)) (range 4)))))
+
+(defn test-push-north? "Apply 'push north' on each column, and checks any-rc-match? after push." [s]
+  (seq (filter identity (map #(any-rc-match? (push-one-row-north s %)) (range 4)))))
 
   )
