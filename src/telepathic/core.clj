@@ -174,14 +174,34 @@
   [s]
   (remove #(nil? %) (concat (test-each-row s) (test-each-column s))))
 
-(defn rotate [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
-  [c13 c9 c5 c1 c14 c10 c6 c2 c15 c11 c7 c3 c16 c12 c8 c4])
+(defn rotate-board-clockwise [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
+  [c13 c9 c5 c1
+	 c14 c10 c6 c2
+	 c15 c11 c7 c3
+	 c16 c12 c8 c4])
 
-(defn rotate-quad0 [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
-  [c5 c1 c3 c4 c6 c2 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16])
+(defn rotate-quad0-clockwise [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
+	"Rotate the tiles of the upper left quadrant clockwise."
+  [c5 c1 c3 c4
+	 c6 c2 c7 c8
+	 c9 c10 c11 c12
+	 c13 c14 c15 c16])
 
-(defn rotate-quad [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16] n]
-  )
+(defn rotate-quad0-counterclockwise [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
+	"Rotate the tiles of the upper left quadrant counterclockwise."
+	[c2 c6 c3 c4
+	 c1 c5 c7 c8
+	 c9 c10 c11 c12
+	 c13 c14 c15 c16])
+
+(defn rotate-quad [board n quadrant-rotation-function]
+	"Rotate quadrant N of board according to QUADRANT-ROTATION-FUNCTION where quadrants are numbered
+	sequentially, clockwise from upper left."
+	(let [rotated-rotated (quadrant-rotation-function
+												 ;; Rotate the whole board counterclockwise n times
+												 (nth (iterate rotate-board-clockwise board) (mod (* n -1) 4)))]
+		;; Rotate the whole board back to its original position
+		(nth (iterate rotate-board-clockwise rotated-rotated) n)))
 
 (defn put-quad-back-in "Inserts a set of q back into a particular set at quad n."
   [q s n])
