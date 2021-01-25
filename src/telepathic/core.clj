@@ -11,10 +11,10 @@
   ;;  TODO Deck of action cards
   ;;  TODO 4 random displayed action cards
   ;;  TODO Pretty display of the grid (board).
-  ;;  TODO EW-Do-si-do function.
-  ;;  TODO NS-Do-si-do function.
-  ;;  DONE EW-Mirror function.
-  ;;  DONE NS-Mirror function.
+  ;;  DONE EW-Do-si-do function.
+  ;;  DONE NS-Do-si-do function.
+  ;;  DONE EW-Reverse function.
+  ;;  DONE NS-Reverse function.
   ;;  TODO Corner-clockwise function.
   ;;  TODO Corner-counterclockwise function.
   ;;
@@ -26,6 +26,9 @@
   ;;  TODO 5. Either player may make an Announcemnt.
   ;;  TODO 6. If no announcement is made, the other player begins their turn as the current player.
   ;;
+  ;;  1 2 5 6 / 3 4 7 8 / 9 10 13 14 / 11 12 15 16
+  ;;  (partition 2 (rest (range 17)))
+  ;;  ;; => ((1 2) (3 4) (5 6) (7 8) (9 10) (11 12) (13 14) (15 16))
   )
 (defn -main
   "I don't do a whole lot ... yet."
@@ -135,17 +138,33 @@
   [s colnum]
   (rot-90 (push-one-row-east (rot-90 s) colnum)))
 
-(defn ew-mirror
-  "Takes in a set of 16 tiles (s), and mirrors one east-west row."
+(defn ew-reverse
+  "Takes in a set of 16 tiles (s), and reverses one east-west row."
   [s rownum]
   (vec (apply concat (for [i (range 4)]
                        (if (= i rownum)
                          (reverse (take 4 (drop (* i 4) s)))
                          (take 4 (drop (* i 4) s)))))))
 
-(defn ns-mirror   "Takes in a set of 16 tiles, and mirrors one north-south column."
+(defn ns-reverse   "Takes in a set of 16 tiles, and reverses one north-south column."
   [s colnum]
-  (rot-90 (ew-mirror (rot-90 s) colnum)))
+  (rot-90 (ew-reverse (rot-90 s) colnum)))
+
+(defn do-si-do "Inputs a set of 4. Outputs the same set with each pair reversed."
+  [[%1 %2 %3 %4]]
+   (seq [%2 %1 %4 %3]))
+
+(defn ew-do-si-do
+  "Takes in a set of 16 tiles (s), and performs do-si-do one east-west row."
+  [s rownum]
+  (vec (apply concat (for [i (range 4)]
+                       (if (= i rownum)
+                         (do-si-do (take 4 (drop (* i 4) s)))
+                         (take 4 (drop (* i 4) s)))))))
+
+(defn ns-do-si-do  "Takes in a set of 16 tiles, and performs do-si-do on one north-south column."
+  [s colnum]
+  (rot-90 (ew-do-si-do (rot-90 s) colnum)))
 
 
 (defn test-each-column   "Returns sequence of matched 3s in the 4 columns" [s]
@@ -154,6 +173,18 @@
 (defn test-rc "Tests each row and column. Returns a list of matched keys."
   [s]
   (remove #(nil? %) (concat (test-each-row s) (test-each-column s))))
+
+(defn rotate [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
+  [c13 c9 c5 c1 c14 c10 c6 c2 c15 c11 c7 c3 c16 c12 c8 c4])
+
+(defn rotate-quad0 [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
+  [c5 c1 c3 c4 c6 c2 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16])
+
+(defn rotate-quad [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16] n]
+  )
+
+(defn put-quad-back-in "Inserts a set of q back into a particular set at quad n."
+  [q s n])
 
 (def sls                                                  ; A shuffled-legal-start for testing purposes.
   (loop [set (shuffle tiles) i 0]
