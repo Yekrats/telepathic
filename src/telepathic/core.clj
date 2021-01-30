@@ -241,6 +241,25 @@
     (and (some #(= % (:win (:color-player state))) board)
          (some #(= % (:win (:shape-player state))) board))))
 
+(defn display-card [card]
+	(let [term-color (cond
+										 (= (first card) :purple) term-color/magenta
+										 (= (first card) :green) term-color/green
+										 (= (first card) :blue) term-color/blue
+										 (= (first card) :orange) term-color/red)
+				shape (cond
+								(= (second card) :plus) "+"
+								(= (second card) :bacon) "〰"
+								(= (second card) :star) "★"
+								(= (second card) :circle) "⬤"
+								)]
+		(print " " (term-color shape) " ")))
+
+(defn display-board [board]
+	(doseq [row (partition 4 board)]
+		(doseq [card row]
+			(display-card card)) (println)))
+
 (comment
   (def shuff1
     [[:purple :plus] [:green :bacon] [:blue :star] [:orange :circle]
