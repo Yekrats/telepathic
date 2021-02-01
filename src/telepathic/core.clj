@@ -214,7 +214,7 @@
 	;; Rotate the whole board back to its original position
 	  (nth (iterate rotate-board-clockwise rotated-rotated) n)))
 
-(def sls                                                  ; A shuffled-legal-start for testing purposes.
+(defn sls []                                                 ; A shuffled-legal-start for testing purposes.
   (loop [set (shuffle tiles) i 0]
     (if (or (not (any-rc-match? set)) (> i 100))
       (if (> i 99)
@@ -231,10 +231,9 @@
 (defn generate-play-state []
   {:color-player (condition-cards colors)
    :shape-player (condition-cards shapes)
-   :board sls
+   :board (sls)
    :actions (initiate-actions)
    })
-
 
 (defn asset-name
   "Takes in a key-pair (color & shape). Returns the name of the asset." ; :green :bacon => "Green Bacon.png"
@@ -259,30 +258,29 @@
 
 (defn display-card [card]
 	(let [term-color (cond
-										 (= (first card) :purple) term-color/magenta
-										 (= (first card) :green) term-color/green
-										 (= (first card) :blue) term-color/blue
-										 (= (first card) :orange) term-color/red)
-				shape (cond
-								(= (second card) :plus) "+"
-								(= (second card) :bacon) "〰"
-								(= (second card) :star) "★"
-								(= (second card) :circle) "⃝"
-								)]
-		(print " " (term-color shape) " ")))
+                        (= (first card) :purple) term-color/magenta
+                        (= (first card) :green) term-color/green
+                        (= (first card) :blue) term-color/blue
+                        (= (first card) :orange) term-color/red)
+		  shape (cond
+                    (= (second card) :plus) "+"
+                    (= (second card) :bacon) "⌇"
+                    (= (second card) :star) "★"
+                    (= (second card) :circle) "⃝")]
+      (print " " (term-color shape) " ")))
 
 (defn display-state [state]
 	(doseq [row (partition 4 (:board state))]
 		(doseq [card row]
 			(display-card card)) (println))
-	(println (map name (:available (:actions state)))))
+	(println "Available actions: " (map name (:available (:actions state)))))
 
 (comment
   (def shuff1
-    [[:purple :plus] [:green :bacon] [:blue :star] [:orange :circle]
-     [:green :circle] [:blue :plus] [:orange :bacon] [:purple :star]
-     [:blue :star] [:orange :circle] [:purple :plus] [:green :bacon]
-     [:orange :bacon] [:purple :star] [:green :circle] [:blue :plus]])
+    [[:green :star] [:orange :bacon] [:green :circle] [:orange :circle]
+    [:purple :plus] [:orange :star] [:purple :bacon] [:orange :plus]
+    [:blue :circle] [:purple :star] [:blue :bacon] [:blue :plus]
+    [:green :bacon] [:green :plus] [:purple :circle] [:blue :star]])
   (def shuff2
     [[:purple :plus] [:green :bacon] [:purple :star] [:orange :circle]
      [:green :circle] [:purple :plus] [:orange :bacon] [:purple :star]
