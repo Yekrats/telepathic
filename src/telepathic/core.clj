@@ -10,7 +10,7 @@
   ;;  DONE Function tests whether game is won based on board state & player conditions.
   ;;  DONE Function tests whether game is lost based on board state & player conditions.
   ;;  DONE Deck of action cards
-  ;;  TODO 4 random displayed action cards
+  ;;  DONE 4 random displayed action cards
   ;;  DONE Pretty display of the grid (board).
   ;;  DONE EW-Do-si-do function.
   ;;  DONE NS-Do-si-do function.
@@ -270,10 +270,11 @@
 								)]
 		(print " " (term-color shape) " ")))
 
-(defn display-board [board]
-	(doseq [row (partition 4 board)]
+(defn display-state [state]
+	(doseq [row (partition 4 (:board state))]
 		(doseq [card row]
-			(display-card card)) (println)))
+			(display-card card)) (println))
+	(println (map name (:available (:actions state)))))
 
 (comment
   (def shuff1
