@@ -9,15 +9,15 @@
   ;;  DONE Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
   ;;  DONE Function tests whether game is won based on board state & player conditions.
   ;;  DONE Function tests whether game is lost based on board state & player conditions.
-  ;;  TODO Deck of action cards
+  ;;  DONE Deck of action cards
   ;;  TODO 4 random displayed action cards
-  ;;  TODO Pretty display of the grid (board).
+  ;;  DONE Pretty display of the grid (board).
   ;;  DONE EW-Do-si-do function.
   ;;  DONE NS-Do-si-do function.
   ;;  DONE EW-Reverse function.
   ;;  DONE NS-Reverse function.
-  ;;  TODO Corner-clockwise function.
-  ;;  TODO Corner-counterclockwise function.
+  ;;  DONE Corner-clockwise function.
+  ;;  DONE Corner-counterclockwise function.
   ;;
   ;;       Game sequence:
   ;;  TODO 1. Start with color player.
@@ -42,7 +42,9 @@
 
 (def shapes [:plus :circle :star :bacon])
 
-(def actions [:row-east :row-west :col-north :col-south])
+(def actions [:row-east :row-west :col-north :col-south
+              :ew-do-si-do :ns-do-si-do :ew-reverse :ns-reverse
+              :corner-clockwise :corner-counterclockwise])
 
 (def play-state
   {:color-player
@@ -51,8 +53,12 @@
    :shape-player
       { :win  :empty
         :lose :empty }
-   :board
-      []})
+   :board []
+   :actions {
+             :deck []
+             :available []
+             :discard []}
+   })
 
 (def tiles (vec (apply concat (into [] (for [color colors] (into [] (for [shape shapes] [color shape]))))))) ; added (apply concat ...) to flatten one level. -- sws
 
@@ -215,10 +221,18 @@
         set)
       (recur (shuffle tiles) (inc i)))))
 
+(defn initiate-actions []
+  (let [deck (shuffle actions)]
+    {:available (take 4 deck)
+     :deck (nthrest deck 4)
+     :discard []}))
+
 (defn generate-play-state []
   {:color-player (condition-cards colors)
    :shape-player (condition-cards shapes)
-   :board sls})
+   :board sls
+   :actions (initiate-actions)
+   })
 
 
 (defn asset-name
