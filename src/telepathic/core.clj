@@ -2,7 +2,8 @@
   (:gen-class)
   (:require [clojure.math.combinatorics :as combo]
             [clojure.string :as str]
-            [clojure.set :as s]))
+            [clojure.set :as s]
+						[clojure.term.colors :as term-color]))
 (comment
   ;;  DONE Set of action cards.
   ;;  DONE Set up COLOR player and SHAPE player. Give each player a goal card and a lose condition card.
