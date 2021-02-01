@@ -187,31 +187,32 @@
 	 c15 c11 c7 c3
 	 c16 c12 c8 c4])
 
-(defn rotate-quad0-clockwise [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
-	"Rotate the tiles of the upper left quadrant clockwise."
+(defn rotate-quad0-clockwise
+  "Rotate the tiles of the upper left quadrant clockwise."
+  [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
   [c5 c1 c3 c4
 	 c6 c2 c7 c8
 	 c9 c10 c11 c12
 	 c13 c14 c15 c16])
 
-(defn rotate-quad0-counterclockwise [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
-	"Rotate the tiles of the upper left quadrant counterclockwise."
+(defn rotate-quad0-counterclockwise
+  "Rotate the tiles of the upper left quadrant counterclockwise."
+  [[c1 c2 c3 c4 c5 c6 c7 c8 c9 c10 c11 c12 c13 c14 c15 c16]]
 	[c2 c6 c3 c4
 	 c1 c5 c7 c8
 	 c9 c10 c11 c12
 	 c13 c14 c15 c16])
 
-(defn rotate-quad [board n quadrant-rotation-function]
-	"Rotate quadrant N of board according to QUADRANT-ROTATION-FUNCTION where quadrants are numbered
-	sequentially, clockwise from upper left."
-	(let [rotated-rotated (quadrant-rotation-function
-												 ;; Rotate the whole board counterclockwise n times
-												 (nth (iterate rotate-board-clockwise board) (mod (* n -1) 4)))]
-		;; Rotate the whole board back to its original position
-		(nth (iterate rotate-board-clockwise rotated-rotated) n)))
+(defn rotate-quad
+  "Rotate quadrant N of board according to QUADRANT-ROTATION-FUNCTION where quadrants are numbered
+  sequentially, clockwise from upper left."
+  [board n quadrant-rotation-function]
 
-(defn put-quad-back-in "Inserts a set of q back into a particular set at quad n."
-  [q s n])
+	(let [rotated-rotated (quadrant-rotation-function
+	;; Rotate the whole board counterclockwise n times
+	                       (nth (iterate rotate-board-clockwise board) (mod (* n -1) 4)))]
+	;; Rotate the whole board back to its original position
+	  (nth (iterate rotate-board-clockwise rotated-rotated) n)))
 
 (def sls                                                  ; A shuffled-legal-start for testing purposes.
   (loop [set (shuffle tiles) i 0]
@@ -305,8 +306,6 @@
         (float (/ legal times-to-try))
         )))
 
-  (defn card-tests? [s]
-    (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
 
 
   (def winning-state
@@ -327,5 +326,8 @@
 
 (defn test-push-north? "Apply 'push north' on each column, and checks any-rc-match? after push." [s]
   (seq (filter identity (map #(any-rc-match? (push-one-row-north s %)) (range 4)))))
+
+(defn card-tests? [s]
+    (when ((some-fn any-rc-match? test-push-north? test-push-east? test-push-south? test-push-west?) s) true))
 
   )
