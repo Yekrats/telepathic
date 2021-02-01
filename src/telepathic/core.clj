@@ -252,7 +252,7 @@
 								(= (second card) :plus) "+"
 								(= (second card) :bacon) "〰"
 								(= (second card) :star) "★"
-								(= (second card) :circle) "⬤"
+								(= (second card) :circle) "⃝"
 								)]
 		(print " " (term-color shape) " ")))
 
