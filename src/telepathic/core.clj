@@ -25,11 +25,9 @@
   ;;  TODO 3. Other player applies action card to the the game state.
   ;;  TODO 4. Check to see if the game is lost, and conclude the game if it is.
   ;;  TODO 5. Either player may make an Announcemnt.
-  ;;  TODO 6. If no announcement is made, the other player begins their turn as the current player.
+  ;;  TODO 6. Is the deck empty? If so, the game is lost. Otherwise draw new action.
+  ;;  TODO 7. If no announcement is made, the other player begins their turn as the current player.
   ;;
-  ;;  1 2 5 6 / 3 4 7 8 / 9 10 13 14 / 11 12 15 16
-  ;;  (partition 2 (rest (range 17)))
-  ;;  ;; => ((1 2) (3 4) (5 6) (7 8) (9 10) (11 12) (13 14) (15 16))
   )
 (defn -main
   "I don't do a whole lot ... yet."
@@ -65,7 +63,6 @@
 (defn condition-cards [cards]
   (zipmap [:win :lose] (take 2 (shuffle cards))))
 
-
 (defn all-match?
   "Checks all the members of a set. If all match, return that value. Otherwise return nil."
   [set]
@@ -82,8 +79,6 @@
     (all-match? (first (apply map vector (second (partition 3 1 set)))))
     (all-match? (second (apply map vector (first (partition 3 1 set)))))
     (all-match? (second (apply map vector (second (partition 3 1 set)))))))
-
-;; (def perm "All the permutations of tiles." (combo/permutations tiles))
 
 (defn rot-90
   "Takes a sequence of 16 color/shape pairs and rotates it 90°."
@@ -172,7 +167,6 @@
 (defn ns-do-si-do  "Takes in a set of 16 tiles, and performs do-si-do on one north-south column."
   [s colnum]
   (rot-90 (ew-do-si-do (rot-90 s) colnum)))
-
 
 (defn test-each-column   "Returns sequence of matched 3s in the 4 columns" [s]
   (test-each-row (rot-90 s)))
@@ -291,6 +285,8 @@
   (def sample1 [[:purple :plus] [:purple :circle] [:purple :star] [:orange :star]])
 
   (def samplefail [[:purple :plus] [:blue :star] [:orange :bacon] [:blue :bacon]])
+
+  (def perm "All the permutations of tiles." (combo/permutations tiles))
 
   (combo/count-permutations tiles)
   ; => 20922789888000 (21 trillion)
