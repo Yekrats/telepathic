@@ -286,6 +286,20 @@
             ; Add the key to the end of the discard.
             (assoc-in [:actions :discard] (conj discard key))))))
 
+(defn draw-action
+  "Take the top card from the action deck, and put it to the bottom of the available pile.
+  Returns the new state."
+  [state]
+  (let [available (-> state :actions :available)
+        top-card (-> state :actions :deck first)
+        rest-of-deck (-> state :actions :deck rest vec)]
+
+    (-> state
+        ; The new deck is all but the top card.
+        (assoc-in [:actions :deck] rest-of-deck)
+        ; The new available pile adds the top card to the available cards.
+        (assoc-in [:actions :available] (conj available top-card)))))
+
 (def testdata
   { :color-player {:win :purple, :lose :green},
     :shape-player {:win :bacon, :lose :star},
