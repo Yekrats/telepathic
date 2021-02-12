@@ -274,13 +274,13 @@
   discard pile of game-state (state). Returns the state, with the
   key card moved to the discard pile."
   [state key]
-  (let [available (:available (:actions state))
+  (let [available (-> state :actions :available)
         index (.indexOf available key) ; Check if key is in the available actions.
-        discard (:discard (:actions state))]
+        discard (-> state :actions :discard)]
 
     (if (= index -1) state ; If key is not found, just return the state.
         (-> state
-            ; Otherwise, remove the item at the index.
+            ; Otherwise, remove the action card at the index.
             (assoc-in [:actions :available] (vec (concat (subvec available 0 index)
                                                          (subvec available (inc index)))))
             ; Add the key to the end of the discard.
