@@ -211,8 +211,11 @@
 (defn sls []                                                 ; A shuffled-legal-start for testing purposes.
   (loop [set (shuffle tiles) i 0]
     (if (or (not (any-rc-match? set)) (> i 100))
-      (if (> i 99)
-        i
+      (if (> i 99) ; Rare safety valve if you've gone 100 times.
+        [   [:blue :circle]  [:green :bacon]  [:purple :circle] [:blue :plus]
+            [:orange :plus]  [:blue :star]    [:orange :circle] [:purple :star]
+            [:green :star]   [:orange :star]  [:blue :bacon]    [:purple :plus]
+            [:purple :bacon] [:green :circle] [:green :plus]    [:orange :bacon]]
         set)
       (recur (shuffle tiles) (inc i)))))
 
