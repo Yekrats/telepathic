@@ -269,6 +269,35 @@
 			(display-card card)) (println))
 	(println "Available actions: " (map name (:available (:actions state)))))
 
+(defn play-action
+  "An action (key) is moved from the available area to the
+  discard pile of game-state (state). Returns the state, with the
+  key card moved to the discard pile."
+  [state key]
+  (let [available (:available (:actions state))
+        index (.indexOf available key) ; Check if key is in the available actions.
+        discard (:discard (:actions state))]
+
+    (if (= index -1) state ; If key is not found, just return the state.
+        (-> state
+            ; Otherwise, remove the item at the index.
+            (assoc-in [:actions :available] (vec (concat (subvec available 0 index)
+                                                         (subvec available (inc index)))))
+            ; Add the key to the end of the discard.
+            (assoc-in [:actions :discard] (conj discard key))))))
+
+(def testdata
+  { :color-player {:win :purple, :lose :green},
+    :shape-player {:win :bacon, :lose :star},
+    :board [[:blue :circle]  [:green :bacon]  [:purple :circle] [:blue :plus]
+            [:orange :plus]  [:blue :star]    [:orange :circle] [:purple :star]
+            [:green :star]   [:orange :star]  [:blue :bacon]    [:purple :plus]
+            [:purple :bacon] [:green :circle] [:green :plus]    [:orange :bacon]],
+    :actions {:available [:col-north :ew-reverse :corner-counterclockwise :row-east],
+              :deck      [:row-west :col-south :ns-do-si-do :ns-reverse :ew-do-si-do
+                          :corner-clockwise]
+              :discard []}})
+
 (comment
   (def shuff1
     [[:green :star] [:orange :bacon] [:green :circle] [:orange :circle]
